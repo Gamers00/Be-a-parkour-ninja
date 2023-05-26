@@ -1,0 +1,61 @@
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Welcome";
+    Text = "Script Made by Gamers!";
+    Icon = "rbxassetid://12325317906";
+})
+wait(2)
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Hey!";
+    Text = "Script Loading Pls Wait!";
+    Icon = "rbxassetid://10450168793";
+})
+wait(10)
+local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
+
+local PhantomForcesWindow = Library:NewWindow("Be a parkour ninja v1")
+
+local KillingCheats = PhantomForcesWindow:NewSection("Main")
+
+KillingCheats:CreateButton("Hitbox", function()
+_G.HeadSize = 20
+_G.Disabled = true
+
+game:GetService('RunService').RenderStepped:connect(function()
+if _G.Disabled then
+for i,v in next, game:GetService('Players'):GetPlayers() do
+if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 0.7
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really blue")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+end
+end)
+end)
+
+KillingCheats:CreateButton("inf jump", function()
+local InfiniteJumpEnabled = true
+game:GetService("UserInputService").JumpRequest:connect(function()
+	if InfiniteJumpEnabled then
+		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+	end
+end)
+
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+end)
+
+KillingCheats:CreateButton("Infinite Health", function()
+while true do
+game.Players.LocalPlayer.Character.Humanoid.Health = 100
+wait(0.2)
+end
+end)
